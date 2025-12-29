@@ -1,0 +1,14 @@
+<h2>Our Courses</h2>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Cost</th>
+  </tr>
+  <% offeredCourses.forEach(course => { %>
+  <tr>
+    <td><%= course.name %></td>
+    <td>$<%= course.cost %></td>
+  </tr>
+  <% }) %>
+</table>

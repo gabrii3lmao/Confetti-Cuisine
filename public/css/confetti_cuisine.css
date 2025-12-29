@@ -1,0 +1,148 @@
+/* RESET SIMPLES, ESTILO ANTIGO */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e5e5e5;
+  color: #333;
+}
+
+/* CONTAINER PRINCIPAL */
+#wrapper {
+  width: 900px;
+  margin: 30px auto;
+  background-color: #ffffff;
+  border: 1px solid #aaa;
+  box-shadow: 0 0 10px #999;
+}
+
+/* HEADER */
+#header {
+  background: linear-gradient(#5a9bd5, #2f5f9e);
+  color: #ffffff;
+  padding: 20px;
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+#header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+/* MENU */
+#menu {
+  background-color: #3a6fb0;
+  padding: 10px;
+}
+
+#menu a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#menu a:hover {
+  text-decoration: underline;
+}
+
+/* CONTEÚDO */
+#content {
+  padding: 20px;
+}
+
+h2 {
+  margin-top: 0;
+  color: #2f5f9e;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* PARÁGRAFOS */
+p {
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* TABELA DE CURSOS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* FORMULÁRIO */
+form {
+  margin-top: 15px;
+}
+
+form label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+form input,
+form textarea {
+  width: 98%;
+  padding: 8px;
+  border: 1px solid #aaa;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: linear-gradient(#6fbf4a, #4d8f30);
+  color: #ffffff;
+  border: 1px solid #3c6e25;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: linear-gradient(#7fdc55, #5aa93b);
+}
+
+/* LINKS */
+a {
+  color: #2f5f9e;
+}
+
+a:hover {
+  color: #1f4372;
+}
+
+/* FOOTER */
+#footer {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  border-top: 1px solid #ccc;
+}

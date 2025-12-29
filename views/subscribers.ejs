@@ -1,0 +1,21 @@
+<h2>Subscribers</h2>
+
+<p>
+  Below is the list of current subscribers.
+</p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Zip Code</th>
+  </tr>
+
+  <% subscribers.forEach(subscriber => { %>
+    <tr>
+      <td><%= subscriber.name %></td>
+      <td><%= subscriber.email %></td>
+      <td><%= subscriber.zipCode %></td>
+    </tr>
+  <% }) %>
+</table>
