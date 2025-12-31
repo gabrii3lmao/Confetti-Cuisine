@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const errorController = require("./controller/errorController");
 const router = require("./routes");
-
+const methodOverride = require("method-override");
 const layouts = require("express-ejs-layouts");
 
 // mongoDb config
@@ -13,11 +13,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(layouts);
+app.use(methodOverride("_method"));
 //configs
 app.set("view engine", "ejs");
 app.set("port", process.env.PORT || 3000);
 
-app.use(router)
+app.use(router);
 app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);
 

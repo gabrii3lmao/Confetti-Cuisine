@@ -4,11 +4,18 @@
   <tr>
     <th>Course</th>
     <th>Cost</th>
+    <th>Actions</th>
   </tr>
+
   <% offeredCourses.forEach(course => { %>
   <tr>
     <td><%= course.name %></td>
     <td>$<%= course.cost %></td>
+    <td>
+      <form action="/courses/<%= course._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
   </tr>
   <% }) %>
 </table>

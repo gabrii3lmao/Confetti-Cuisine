@@ -16,6 +16,9 @@ router.post("/createCourse", courseController.createCourse, (req, res) => {
 router.get("/courses", courseController.getAllCourses, (req, res) => {
   res.render("courses", { offeredCourses: req.data });
 });
+router.delete("/courses/:id", courseController.deleteCourse, (req, res) => {
+  res.redirect("/courses");
+});
 
 router.get("/contact", homeController.showSignUp);
 router.post("/contact", subscribersControllers.createSubscriber, (req, res) => {

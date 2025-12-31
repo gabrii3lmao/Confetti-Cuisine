@@ -23,4 +23,20 @@ module.exports = {
       next(error);
     }
   },
+
+  async deleteCourse(req, res, next) {
+    const { id } = req.params;
+    try {
+      const result = await Course.findByIdAndDelete(id);
+      if (!result) {
+        const error = new Error("Course not found");
+        error.status = 404;
+        throw error;
+      }
+      next();
+    } catch (error) {
+      console.log(`There was an error trying to delete this course: ${error}`);
+      next(error);
+    }
+  },
 };
