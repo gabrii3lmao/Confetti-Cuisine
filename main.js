@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(layouts);
 app.use(methodOverride("_method"));
+
 //configs
 app.set("view engine", "ejs");
 app.set("port", process.env.PORT || 3000);
@@ -25,7 +26,7 @@ app.use(errorController.internalServerError);
 async function startApplication() {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/recipe_db");
-    console.log("BD conectado");
+    console.log("Connected to the database");
 
     app.listen(app.get("port"), () => {
       console.log(
@@ -33,7 +34,10 @@ async function startApplication() {
       );
     });
   } catch (error) {
-    console.error("Erro ao conectar no MongoDB:", error);
+    console.error(
+      "There was an error trying to connect to the database:",
+      error
+    );
   }
 }
 

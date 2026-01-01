@@ -21,7 +21,7 @@ router.delete("/courses/:id", courseController.deleteCourse, (req, res) => {
 });
 
 router.get("/contact", homeController.showSignUp);
-router.post("/contact", subscribersControllers.createSubscriber, (req, res) => {
+router.post("/subscribe", subscribersControllers.createSubscriber, (req, res) => {
   res.render("thanks");
 });
 
