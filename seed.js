@@ -1,45 +1,50 @@
 const mongoose = require("mongoose");
 const Subscriber = require("./models/subscriber");
+const Course = require("./models/course");
 
-async function restoreDb() {
-  try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/recipe_db");
-    console.log("Connected to the database");
-    mongoose.connection;
+async function seedDatabase() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/recipe_db");
 
-    const contacts = [
-      { name: "Jon Wexler", email: "jon@jonwexler.com", zipCode: 10016 },
-      {
-        name: "Chef Eggplant",
-        email: "eggplant@recipeapp.com",
-        zipCode: 20331,
-      },
-      {
-        name: "Professor Souffle",
-        email: "souffle@recipeapp.com",
-        zipCode: 19103,
-      },
-    ];
+  console.log("Conectado ao banco");
 
-    await Subscriber.deleteMany();
-    console.log("Users deleted");
+  // limpa dados antigos (opcional)
+  await Subscriber.deleteMany({});
+  await Course.deleteMany({});
 
-    for (const c of contacts) {
-      await Subscriber.create({
-        name: c.name,
-        email: c.email,
-        zipCode: c.zipCode,
-      });
-    }
-    console.log("Users created");
-  } catch (error) {
-    console.log(
-      `An error has ocorried trying to restore the database: ${error}`
-    );
-  } finally {
-    await mongoose.connection.close();
-    console.log(`Connection closed with the database!`);
-  }
+  // cria courses
+  const course1 = await Course.create({
+    tittle: "Node.js Backend",
+    description: "API com Node e Express",
+    zipCode: 10016,
+  });
+
+  const course2 = await Course.create({
+    tittle: "NestJS Fundamentals",
+    description: "Arquitetura backend com NestJS",
+    zipCode: 10016,
+  });
+
+  console.log("Courses criados");
+
+  
+  const subscriber = await Subscriber.create({
+    name: "Jon Wexler",
+    email: "jon@jonwexler.com",
+    zipCode: 10016,
+    courses: [course1._id, course2._id],
+  });
+
+  console.log("Subscriber criado");
+
+  
+  const populatedSubscriber = await Subscriber
+    .findById(subscriber._id)
+    .populate("courses");
+
+  console.log(JSON.stringify(populatedSubscriber, null, 2));
+
+  await mongoose.connection.close();
+  console.log("Conexão encerrada");
 }
 
-restoreDb();
+seedDatabase().catch(console.error);

@@ -10,5 +10,5 @@ exports.internalServerError = (error, req, res, next) => {
   let errorCode = httpStatus.StatusCodes.INTERNAL_SERVER_ERROR;
   console.log(`ERROR Ocurried: ${error.stack}`);
   res.status(errorCode);
-  res.send(`${errorCode} | Sorry, our aplication is taking a nap!`);
+  res.render("error500");
 };
