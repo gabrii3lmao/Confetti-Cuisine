@@ -2,15 +2,19 @@ const mongoose = require("mongoose");
 const Subscriber = require("../models/subscriber");
 
 module.exports = {
-  async getAllSubscribers(req, res, next) {
+  async index(req, res, next) {
     try {
       const subscribers = await Subscriber.find({});
-      req.data = subscribers;
+      res.locals.subscribers = subscribers;
       next();
     } catch (error) {
       console.log("An error has occuried searching all subscriber: ", error);
       next(error);
     }
+  },
+
+  async indexView(req, res) {
+    res.render("subscribers/index");
   },
 
   async createSubscriber(req, res, next) {

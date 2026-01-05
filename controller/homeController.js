@@ -7,5 +7,5 @@ exports.postedSignUpForm = (req, res) => {
 };
 
 exports.showCourseForm = (req, res) => {
-  res.render("createCourse");
+  res.render("course/createCourse");
 };

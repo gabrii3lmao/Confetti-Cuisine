@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Course = require("../models/course");
 
 module.exports = {
-  async getAllCourses(req, res, next) {
+  async index(req, res, next) {
     try {
       const courses = await Course.find({});
-      req.data = courses;
+      res.locals.offeredCourses = courses;
       next();
     } catch (error) {
       console.log(`There was an error trying to get all courses: ${error}`);
@@ -13,10 +13,14 @@ module.exports = {
     }
   },
 
+  async indexView(req, res) {
+    res.render("course/courses");
+  },
+
   async createCourse(req, res, next) {
     try {
-      const { name, cost } = req.body;
-      await Course.create({ name: name, cost: cost });
+      const { tittle, description } = req.body;
+      await Course.create({ tittle: tittle, description: description });
       next();
     } catch (error) {
       console.log("An error has occuried creating a new course: ", error);
