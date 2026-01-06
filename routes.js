@@ -40,10 +40,14 @@ router.post(
 //users routes
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
+router.get("/users/:id", usersController.show, usersController.showView);
 router.post(
   "/users/create",
   usersController.create,
   usersController.redirectView
 );
+router.delete("/users/:id", usersController.deleteUser, (req, res) => {
+  res.redirect("/users");
+});
 
 module.exports = router;

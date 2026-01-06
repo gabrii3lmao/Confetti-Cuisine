@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const Subscriber = require("./subscriber");
 
 const UserSchema = new Schema(
   {
@@ -34,12 +35,26 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
+UserSchema.pre("save", async function () {
+  let user = this;
+  try {
+    if (!user.subscribedAccount) {
+      user.subscribedAccount = await Subscriber.findOne({
+        email: user.email,
+      });
+    }
+  } catch (error) {
+    console.log(`Error in connecting subscriber: ${error}`);
+    throw error;
+  }
+});
+
 UserSchema.virtual("fullName").get(function () {
   return `${this.name.first} ${this.name.last}`;
 });
 
-UserSchema.virtual("userNameLength").get(function() {
+UserSchema.virtual("userNameLength").get(function () {
   return this.name.first.length + this.name.last.length;
-})
+});
 
 module.exports = mongoose.model("User", UserSchema);

@@ -1,5 +1,6 @@
 <h2>Users Table</h2>
 <table class="table">
+  <h3><a href="/users/new">Create a new User</a></h3>
   <thead>
     <tr>
       <th>Name</th>
@@ -9,9 +10,11 @@
     </tr>
   </thead>
   <tbody>
-    <% users.forEach(user => { %> 
+    <% users.forEach(user => { %>
     <tr>
-      <td><%= user.fullName%></td>
+      <td>
+        <a href="<%=`/users/${user.id}` %>"> <%= user.fullName%> </a>
+      </td>
       <td><%= user.email %></td>
       <td><%= user.zipCode%></td>
       <td><%= user.userNameLength%></td>

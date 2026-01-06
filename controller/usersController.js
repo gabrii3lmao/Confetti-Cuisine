@@ -46,4 +46,35 @@ module.exports = {
     if (redirectPath) res.redirect(redirectPath);
     else next();
   },
+
+  async show(req, res, next) {
+    const { id } = req.params;
+    try {
+      res.locals.user = await User.findById(id);
+      next();
+    } catch (error) {
+      console.log(`Error fetching user by ID: ${error.message}`);
+      next(error);
+    }
+  },
+
+  showView(req, res) {
+    res.render("users/show");
+  },
+
+  async deleteUser(req, res, next) {
+    const { id } = req.params;
+    try {
+      const result = await User.findByIdAndDelete(id);
+      if (!result) {
+        const error = new Error("User not found");
+        error.status = 404;
+        throw error;
+      }
+      next();
+    } catch (error) {
+      console.log(`There was an error trying to delete this user: ${error}`);
+      next(error);
+    }
+  },
 };
