@@ -77,4 +77,47 @@ module.exports = {
       next(error);
     }
   },
+
+  async edit(req, res, next) {
+    const { id } = req.params;
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      res.render("users/edit", { user: user });
+    } catch (error) {
+      console.log(`Error fetching user by ID: ${error}`);
+      next(error);
+    }
+  },
+
+  async update(req, res, next) {
+    try {
+      const user = await User.findById(req.params.id);
+
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+
+      user.set({
+        name: {
+          first: req.body.first,
+          last: req.body.last,
+        },
+        email: req.body.email,
+        zipCode: req.body.zipCode,
+      });
+
+      if (req.body.password) {
+        user.password = req.body.password;
+      }
+
+      await user.save();
+
+      res.redirect(`/users/${user._id}`);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

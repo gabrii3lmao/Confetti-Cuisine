@@ -1,22 +1,30 @@
 <div class="data-form">
-  <form action="/users/create" method="POST">
-    <h2>Create a new user:</h2>
+  <form action="<%= `/users/${user.id}/update?_method=PUT` %>" method="POST">
+    <h2>Update <%= user.fullName %></h2>
     <label for="inputFirstName">First Name</label>
     <input
       type="text"
       name="first"
       id="inputFirstName"
       placeholder="First"
+      value="<%= user.name.first %>"
       autofocus
     />
     <label for="inputLastName">Last Name</label>
-    <input type="text" name="last" id="inputLastName" placeholder="Last" />
+    <input
+      type="text"
+      name="last"
+      id="inputLastName"
+      placeholder="Last"
+      value="<%= user.name.last %>"
+    />
     <label for="inputPassword">Password</label>
     <input
       type="password"
       name="password"
       id="inputPassword"
       placeholder="Password"
+      value="<%= user.password %>"
       required
     />
     <label for="inputEmail">Email address</label>
@@ -25,6 +33,7 @@
       name="email"
       id="inputEmail"
       placeholder="Email address"
+      value="<%= user.email %>"
       required
     />
     <label for="inputZipCode">Zip Code</label>
@@ -34,8 +43,9 @@
       id="inputZipCode"
       pattern="\d*"
       placeholder="Zip Code"
+      value="<%= user.zipCode %>"
       required
     />
-    <button type="submit">Sign in</button>
+    <button type="submit">Update</button>
   </form>
 </div>

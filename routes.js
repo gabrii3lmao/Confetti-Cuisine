@@ -46,8 +46,10 @@ router.post(
   usersController.create,
   usersController.redirectView
 );
-router.delete("/users/:id", usersController.deleteUser, (req, res) => {
+router.delete("/users/:id/delete", usersController.deleteUser, (req, res) => {
   res.redirect("/users");
 });
+router.get("/users/:id/edit", usersController.edit);
+router.put("/users/:id/update", usersController.update);
 
 module.exports = router;
