@@ -20,10 +20,16 @@ module.exports = {
   async createSubscriber(req, res, next) {
     try {
       const { name, email, zipCode } = req.body;
-      await Subscriber.create({ name: name, email: email, zipCode: zipCode });
+      let subscriber = await Subscriber.create({
+        name: name,
+        email: email,
+        zipCode: zipCode,
+      });
+      req.flash("success", `${subscriber.name} subscribed for our Course!`);
       next();
     } catch (error) {
       console.log("An error has occuried creating a new subscriber: ", error);
+      req.flash("error", `Cound'nt subscribe the user`);
       next(error);
     }
   },

@@ -112,3 +112,30 @@ form button:hover {
   font-size: 12px;
   border-top: 1px solid #ccc;
 }
+
+/* FLASH MESSAGES */
+.flashes {
+  padding: 15px 20px 0 20px;
+}
+
+.flash {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border: 1px solid;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+/* SUCCESS */
+.flash.success {
+  background: #e6f4e6;
+  color: #2f6b2f;
+  border-color: #6fbf4a;
+}
+
+/* ERROR */
+.flash.error {
+  background: #fbeaea;
+  color: #8a1f1f;
+  border-color: #d66;
+}

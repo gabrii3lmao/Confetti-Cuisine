@@ -12,6 +12,16 @@
         <p>Learning with flavor</p>
       </header>
 
+      <div class="flashes">
+        <% if (flashMessages) { %> <% if (flashMessages.success) { %> <%
+        flashMessages.success.forEach(msg => { %>
+        <div class="flash success"><%= msg %></div>
+        <% }) %> <% } %> <% if (flashMessages.error) { %> <%
+        flashMessages.error.forEach(msg => { %>
+        <div class="flash error"><%= msg %></div>
+        <% }) %> <% } %> <% } %>
+      </div>
+
       <nav id="menu">
         <a href="/">Home</a>
         <a href="/courses">Courses</a>

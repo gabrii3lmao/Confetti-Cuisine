@@ -7,8 +7,17 @@ exports.pageNotFoundError = (req, res) => {
 };
 
 exports.internalServerError = (error, req, res, next) => {
+  const httpStatus = require("http-status-codes");
   let errorCode = httpStatus.StatusCodes.INTERNAL_SERVER_ERROR;
-  console.log(`ERROR Ocurried: ${error.stack}`);
-  res.status(errorCode);
-  res.render("error500");
+
+  console.error(`ERROR Ocurried: ${error.stack}`);
+
+  // garante que flashMessages existe
+  const flashes = req.flash();
+  res.locals.flashMessages = {
+    success: flashes.success || [],
+    error: flashes.error || [],
+  };
+
+  res.status(errorCode).render("error500");
 };

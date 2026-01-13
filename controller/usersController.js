@@ -32,11 +32,13 @@ module.exports = {
     };
     try {
       let user = await User.create(userParams);
+      req.flash("success", `${user.fullName}'s account created successfully!`);
       res.locals.redirect = "/users";
       res.locals.user = user;
       next();
     } catch (error) {
       console.log("An error has occuried creating a new User: ", error);
+      req.flash("error", `Failed to create user account.`);
       next(error);
     }
   },
@@ -71,9 +73,11 @@ module.exports = {
         error.status = 404;
         throw error;
       }
+      req.flash("success", `${result.fullName}'s account was deleted!`);
       next();
     } catch (error) {
       console.log(`There was an error trying to delete this user: ${error}`);
+      req.flash("error", `Couldn't delete the account`);
       next(error);
     }
   },
@@ -117,6 +121,34 @@ module.exports = {
 
       res.redirect(`/users/${user._id}`);
     } catch (error) {
+      next(error);
+    }
+  },
+
+  login(req, res) {
+    res.render("users/login");
+  },
+
+  async authenticate(req, res, next) {
+    try {
+      let user = await User.findOne({ email: req.body.email });
+
+      if (user && user.password === req.body.password) {
+        res.locals.redirect = `/users/${user._id}`;
+        req.flash("success", `${user.fullName}'s logged in successfully!`);
+        res.locals.user = user;
+        next();
+      } else {
+        req.flash(
+          "error",
+          `Your account or password is incorrect.
+Please try again or contact your system administrator!`
+        );
+        res.locals.redirect = "/users/login";
+        next();
+      }
+    } catch (error) {
+      console.log(`Error logging in user: ${error}`);
       next(error);
     }
   },

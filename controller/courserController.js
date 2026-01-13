@@ -20,10 +20,15 @@ module.exports = {
   async createCourse(req, res, next) {
     try {
       const { tittle, description } = req.body;
-      await Course.create({ tittle: tittle, description: description });
+      let course = await Course.create({
+        tittle: tittle,
+        description: description,
+      });
+      req.flash("success", `Course ${course.tittle} was created sucessfuly`);
       next();
     } catch (error) {
       console.log("An error has occuried creating a new course: ", error);
+      req.flash("error", `Failed to create the course`);
       next(error);
     }
   },
@@ -37,6 +42,7 @@ module.exports = {
         error.status = 404;
         throw error;
       }
+      req.flash("success", `Course ${result.tittle} was deleted sucessfuly`);
       next();
     } catch (error) {
       console.log(`There was an error trying to delete this course: ${error}`);
